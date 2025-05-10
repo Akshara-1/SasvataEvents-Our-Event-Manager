@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SasvataEvents - Newsletter</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="merch.html">Merch</a></li>
+            <li><a href="cart.html">Cart <span id="cart-counter" class="cart-counter">0</span></a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="bookings.html">My Bookings</a></li>
+            <li><a href="newsletter.html" aria-current="page">Newsletter</a></li>
+            <li><a href="community.html">Community</a></li>
+        </ul>
+    </nav>
+    <div id="notification" class="notification" aria-live="polite"></div>
+    <div class="container">
+        <h1 class="neon">Join Our Newsletter</h1>
+        <section id="newsletter" class="newsletter-section">
+            <h2>Stay Updated</h2>
+            <p id="subscriber-count">Join <span id="subscriber-total">0</span> subscribers!</p>
+            <form id="newsletter-form" aria-describedby="form-error">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter" aria-describedby="email-error">
+                    <span id="email-error" class="error" aria-live="polite"></span>
+                </div>
+                <div class="form-group">
+                    <label>Preferences</label>
+                    <label><input type="checkbox" name="preferences" value="Concert"> Concert Updates</label>
+                    <label><input type="checkbox" name="preferences" value="Workshop"> Workshop Updates</label>
+                    <label><input type="checkbox" name="preferences" value="Show"> Show Updates</label>
+                </div>
+                <button type="submit" class="btn">Subscribe <span class="spinner" style="display: none;"></span></button>
+            </form>
+            <div id="newsletter-confirmation" class="newsletter-confirmation" style="display: none;">
+                <p>Thank you for subscribing! You'll receive updates on events and offers.</p>
+            </div>
+            <form id="unsubscribe-form" aria-describedby="unsubscribe-error">
+                <div class="form-group">
+                    <label for="unsubscribe-email">Unsubscribe</label>
+                    <input type="email" id="unsubscribe-email" name="unsubscribe-email" placeholder="Enter your email" required aria-label="Email address to unsubscribe" aria-describedby="unsubscribe-email-error">
+                    <span id="unsubscribe-email-error" class="error" aria-live="polite"></span>
+                </div>
+                <button type="submit" class="btn">Unsubscribe <span class="spinner" style="display: none;"></span></button>
+            </form>
+            <div class="social-share">
+                <h3>Share Newsletter</h3>
+                <button class="btn social-btn" onclick="shareNewsletter('twitter')">Share on Twitter/X</button>
+                <button class="btn social-btn" onclick="shareNewsletter('facebook')">Share on Facebook</button>
+            </div>
+        </section>
+        <section id="recent-newsletters" class="newsletter-section">
+            <h2>Recent Newsletters</h2>
+            <div id="newsletter-list"></div>
+        </section>
+    </div>
+    <footer class="footer">
+        <p>© 2025 SasvataEvents - All Rights Reserved</p>
+    </footer>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
+    <script defer src="scripts.js"></script>
+</body>
+</html>

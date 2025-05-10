@@ -1,0 +1,610 @@
+/* Custom Properties */
+:root {
+    --primary-color: #00f7ff;
+    --secondary-color: #ff00ff;
+    --bg-color: #0d0d0d;
+    --card-bg: #1c1c1c;
+    --text-color: #e0e0e0;
+    --error-color: #ff6666; /* Brighter red for error notifications */
+    --success-color: #00cc00; /* Darker green for success notifications */
+}
+
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@500&display=swap');
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, transparent 70%);
+    z-index: -1;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--primary-color);
+}
+
+/* Neon Flicker Animation for Headings */
+h1.neon {
+    text-align: center;
+    font-size: 2.5em;
+    text-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+    animation: neon-flicker 3s infinite;
+}
+
+@keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 
+            0 0 5px var(--primary-color),
+            0 0 10px var(--primary-color),
+            0 0 20px var(--primary-color);
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+        opacity: 0.6;
+    }
+}
+
+h2 {
+    text-align: center;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulsating Animation for Remove Button */
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 10px #ff4444; }
+    50% { transform: scale(1.1); box-shadow: 0 0 25px #ff4444; }
+    100% { transform: scale(1); box-shadow: 0 0 10px #ff4444; }
+}
+
+/* Layout */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 20px 20px;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(20, 20, 20, 0.9);
+    backdrop-filter: blur(8px);
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.navbar li {
+    margin: 0;
+}
+
+.navbar a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1em;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+    color: var(--primary-color);
+    text-shadow: 0 0 5px var(--primary-color);
+}
+
+.navbar a[aria-current="page"] {
+    color: var(--secondary-color);
+    text-shadow: 0 0 5px var(--secondary-color);
+}
+
+.cart-counter {
+    background: var(--secondary-color);
+    color: var(--bg-color);
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 12px;
+}
+
+/* Event, Merch, and Post Grids */
+.event-list,
+.merch-list,
+.gallery,
+.order-list,
+.post-list,
+.newsletter-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Card Component */
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: waveIn 0.8s ease-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 247, 255, 0.3);
+    border-color: var(--primary-color);
+}
+
+.card img,
+.gallery img,
+.gallery iframe {
+    width: 100%;
+    max-width: 300px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.card img:hover,
+.gallery img:hover,
+.gallery iframe:hover {
+    transform: scale(1.03);
+}
+
+.card audio {
+    width: 100%;
+    margin-top: 15px;
+    filter: invert(1);
+}
+
+/* Buttons */
+.btn {
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover,
+.btn:focus {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--secondary-color);
+}
+
+.btn.remove-btn {
+    background: #ff4444;
+    padding: 8px 16px;
+    margin-left: 10px;
+}
+
+.btn.remove-btn:hover,
+.btn.remove-btn:focus {
+    box-shadow: 0 0 20px #ff4444;
+    animation: pulse 1s infinite;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+.btn:active::after {
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+}
+
+.btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+}
+
+.social-btn {
+    background: var(--primary-color);
+    margin: 0 10px;
+}
+
+.social-btn:hover {
+    box-shadow: 0 0 20px var(--primary-color);
+}
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+    max-width: 300px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.notification.success {
+    background: var(--success-color);
+    color: var(--bg-color);
+}
+
+.notification.error {
+    background: var(--error-color);
+    color: var(--text-color);
+}
+
+/* Forms */
+.checkout-section,
+.cart-section,
+.filter-section,
+.order-summary,
+.newsletter-section,
+.community-section {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #333;
+    margin-top: 25px;
+    animation: fadeIn 1s ease-out;
+}
+
+.newsletter-section {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea,
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #252525;
+    color: var(--text-color);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    outline: none;
+}
+
+.form-group input.invalid,
+.form-group textarea.invalid {
+    border-color: var(--error-color);
+    animation: glitch 0.3s;
+}
+
+.form-group input.valid {
+    border-color: var(--success-color);
+}
+
+.form-group .error {
+    color: var(--error-color);
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: block;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+/* Newsletter Confirmation */
+.newsletter-confirmation {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--card-bg);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    text-align: center;
+    color: var(--text-color);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.newsletter-confirmation p {
+    margin: 0;
+}
+
+/* Social Share */
+.social-share {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.social-share h3 {
+    margin-bottom: 10px;
+}
+
+/* Spinner */
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 600px;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.modal-content p {
+    margin: 10px 0;
+}
+
+.modal-content .btn {
+    margin: 10px;
+}
+
+/* Orders and Posts Tables */
+.order-list table,
+.post-list table,
+.newsletter-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.order-list th,
+.order-list td,
+.post-list th,
+.post-list td,
+.newsletter-list th,
+.newsletter-list td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.order-list th,
+.post-list th,
+.newsletter-list th {
+    background: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.order-list tr:hover,
+.post-list tr:hover,
+.newsletter-list tr:hover {
+    background: #2a2a2a;
+}
+
+.order-list .btn,
+.post-list .btn,
+.newsletter-list .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+/* Checkout Button Container */
+.checkout-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Utility Classes */
+.flex {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.mb-2 {
+    margin-bottom: 8px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    background: #141414;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .container {
+        padding-top: 60px;
+    }
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    .event-list,
+    .merch-list,
+    .gallery,
+    .order-list,
+    .post-list,
+    .newsletter-list {
+        grid-template-columns: 1fr;
+    }
+    .card img,
+    .gallery img,
+    .gallery iframe {
+        max-width: 100%;
+    }
+    .notification {
+        top: 10px;
+        right: 10px;
+        max-width: 90%;
+    }
+    .modal-content {
+        max-width: 90%;
+    }
+    .newsletter-section {
+        padding: 15px;
+    }
+    .order-list table,
+    .order-list thead,
+    .order-list tbody,
+    .order-list th,
+    .order-list td,
+    .order-list tr,
+    .post-list table,
+    .post-list thead,
+    .post-list tbody,
+    .post-list th,
+    .post-list td,
+    .post-list tr,
+    .newsletter-list table,
+    .newsletter-list thead,
+    .newsletter-list tbody,
+    .newsletter-list th,
+    .newsletter-list td,
+    .newsletter-list tr {
+        display: block;
+    }
+    .order-list th,
+    .post-list th,
+    .newsletter-list th {
+        display: none;
+    }
+    .order-list td,
+    .post-list td,
+    .newsletter-list td {
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+    }
+    .order-list td:before,
+    .post-list td:before,
+    .newsletter-list td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        text-align: left;
+        color: var(--primary-color);
+    }
+}

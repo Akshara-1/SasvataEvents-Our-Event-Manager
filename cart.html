@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SasvataEvents - Cart</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="merch.html">Merch</a></li>
+            <li><a href="cart.html" aria-current="page">Cart <span id="cart-counter" class="cart-counter">0</span></a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="bookings.html">My Bookings</a></li>
+            <li><a href="newsletter.html">Newsletter</a></li>
+            <li><a href="community.html">Community</a></li>
+        </ul>
+    </nav>
+    <div id="notification" class="notification" aria-live="polite"></div>
+    <div class="container">
+        <h1 class="neon">Your Cart</h1>
+        <section class="cart-section">
+            <h2>Cart Items</h2>
+            <div id="cart-items"></div>
+            <p id="cart-total">Total: $0.00</p>
+            <div class="checkout-button-container">
+                <a href="checkout.html" class="btn">Proceed to Checkout</a>
+            </div>
+        </section>
+    </div>
+    <footer class="footer">
+        <p>© 2025 SasvataEvents - All Rights Reserved</p>
+    </footer>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
+    <script defer src="scripts.js"></script>
+    <script defer>
+        updateCartCounter();
+        renderCart("cart-items", "cart-total", "cart-counter");
+    </script>
+</body>
+</html>

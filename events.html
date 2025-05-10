@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SasvataEvents - Events</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html" aria-current="page">Events</a></li>
+            <li><a href="merch.html">Merch</a></li>
+            <li><a href="cart.html">Cart <span id="cart-counter" class="cart-counter">0</span></a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="bookings.html">My Bookings</a></li>
+            <li><a href="newsletter.html">Newsletter</a></li>
+            <li><a href="community.html">Community</a></li>
+        </ul>
+    </nav>
+    <div id="notification" class="notification" aria-live="polite"></div>
+    <div class="container">
+        <h1 class="neon">Events</h1>
+        <section class="filter-section">
+            <h2>Filter Events</h2>
+            <form id="filter-form">
+                <div class="form-group">
+                    <label for="search">Search</label>
+                    <input type="text" id="search" name="search" placeholder="Search events..." aria-label="Search events">
+                </div>
+                <div class="form-group">
+                    <label for="type">Event Type</label>
+                    <select id="type" name="type" aria-label="Select event type">
+                        <option value="">All Types</option>
+                        <option value="Concert">Concert</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Show">Show</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="start-date">Start Date</label>
+                    <input type="date" id="start-date" name="start-date" aria-label="Start date">
+                </div>
+                <div class="form-group">
+                    <label for="end-date">End Date</label>
+                    <input type="date" id="end-date" name="end-date" aria-label="End date">
+                </div>
+                <button type="submit" class="btn">Apply Filters</button>
+            </form>
+        </section>
+        <section class="event-section">
+            <h2>Available Events</h2>
+            <div id="event-list" class="event-list">
+                <div class="card">
+                    <img src="https://images.stockcake.com/public/2/4/2/24216587-34a9-4a17-946a-ff9427afe708_large/neon-concert-future-stockcake.jpg" alt="Cyber Pulse Concert" loading="lazy">
+                    <h3>Cyber Pulse Concert</h3>
+                    <p>Type: Concert</p>
+                    <p>Date: May 1, 2025</p>
+                    <p>Price: $50</p>
+                    <p>Tickets Available: 100</p>
+                    <audio controls src="audio/cyber_pulse_preview.mp3" aria-label="Preview of Cyber Pulse Concert">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <input type="number" min="1" max="100" value="1" aria-label="Ticket quantity for Cyber Pulse Concert">
+                    <button class="btn" onclick="addToCart(1, 'ticket', this.previousElementSibling.value)">Add Tickets</button>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Neon Hack Workshop" loading="lazy">
+                    <h3>Neon Hack Workshop</h3>
+                    <p>Type: Workshop</p>
+                    <p>Date: June 15, 2025</p>
+                    <p>Price: $30</p>
+                    <p>Tickets Available: 50</p>
+                    <audio controls src="audio/neon_hack_preview.mp3" aria-label="Preview of Neon Hack Workshop">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <input type="number" min="1" max="50" value="1" aria-label="Ticket quantity for Neon Hack Workshop">
+                    <button class="btn" onclick="addToCart(2, 'ticket', this.previousElementSibling.value)">Add Tickets</button>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Quantum Clash Show" loading="lazy">
+                    <h3>Quantum Clash Show</h3>
+                    <p>Type: Show</p>
+                    <p>Date: July 20, 2025</p>
+                    <p>Price: $75</p>
+                    <p>Tickets Available: 200</p>
+                    <audio controls src="audio/quantum_clash_preview.mp3" aria-label="Preview of Quantum Clash Show">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <input type="number" min="1" max="200" value="1" aria-label="Ticket quantity for Quantum Clash Show">
+                    <button class="btn" onclick="addToCart(3, 'ticket', this.previousElementSibling.value)">Add Tickets</button>
+                </div>
+                <div class="card">
+                    <img src="https://thumbs.dreamstime.com/b/neon-synthwave-city-night-seen-rooftop-glowing-signs-rain-futuristic-synthwave-cityscape-viewed-rooftop-373703165.jpg" alt="Synthwave Nights" loading="lazy">
+                    <h3>Synthwave Nights</h3>
+                    <p>Type: Concert</p>
+                    <p>Date: August 10, 2025</p>
+                    <p>Price: $60</p>
+                    <p>Tickets Available: 150</p>
+                    <audio controls src="audio/synthwave_nights_preview.mp3" aria-label="Preview of Synthwave Nights">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <input type="number" min="1" max="150" value="1" aria-label="Ticket quantity for Synthwave Nights">
+                    <button class="btn" onclick="addToCart(4, 'ticket', this.previousElementSibling.value)">Add Tickets</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="footer">
+        <p>© 2025 SasvataEvents - All Rights Reserved</p>
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        updateCartCounter();
+        renderEvents("event-list");
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SasvataEvents - Community</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="merch.html">Merch</a></li>
+            <li><a href="cart.html">Cart <span id="cart-counter" class="cart-counter">0</span></a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="bookings.html">My Bookings</a></li>
+            <li><a href="newsletter.html">Newsletter</a></li>
+            <li><a href="community.html" aria-current="page">Community</a></li>
+        </ul>
+    </nav>
+    <div id="notification" class="notification"></div>
+    <div class="container">
+        <h1 class="neon">Community Hub</h1>
+        <section id="community" class="community-section">
+            <h2>Join the Discussion</h2>
+            <form id="post-form">
+                <div class="form-group">
+                    <label for="title">Post Title</label>
+                    <input type="text" id="title" name="title" placeholder="Enter post title" required aria-label="Post title">
+                </div>
+                <div class="form-group">
+                    <label for="author">Your Name</label>
+                    <input type="text" id="author" name="author" placeholder="Enter your name" required aria-label="Author name">
+                </div>
+                <div class="form-group">
+                    <label for="content">Post Content</label>
+                    <textarea id="content" name="content" placeholder="Share your thoughts" required aria-label="Post content"></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Post</button>
+            </form>
+            <h2>Community Posts</h2>
+            <div id="post-list" class="post-list"></div>
+        </section>
+    </div>
+    <footer class="footer">
+        <p>© 2025 SasvataEvents - All Rights Reserved</p>
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        updateCartCounter();
+        renderPosts("post-list");
+
+        document.getElementById("post-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const title = sanitizeHTML(document.getElementById("title").value.trim());
+            const author = sanitizeHTML(document.getElementById("author").value.trim());
+            const content = sanitizeHTML(document.getElementById("content").value.trim());
+
+            if (!title || !author || !content) {
+                showNotification("Please fill in all fields!", "error");
+                return;
+            }
+
+            if (!/^[A-Za-z0-9\s!?-]{5,100}$/.test(title)) {
+                showNotification("Invalid title! Use 5-100 alphanumeric characters, spaces, or !?-.", "error");
+                document.getElementById("title").classList.add("invalid");
+                setTimeout(() => document.getElementById("title").classList.remove("invalid"), 3000);
+                return;
+            }
+
+            if (!/^[A-Za-z\s]{2,50}$/.test(author)) {
+                showNotification("Invalid name! Use 2-50 letters and spaces.", "error");
+                document.getElementById("author").classList.add("invalid");
+                setTimeout(() => document.getElementById("author").classList.remove("invalid"), 3000);
+                return;
+            }
+
+            if (!/^[A-Za-z0-9\s,.!?-]{10,500}$/.test(content)) {
+                showNotification("Invalid content! Use 10-500 alphanumeric characters, spaces, or ,.!?-.", "error");
+                document.getElementById("content").classList.add("invalid");
+                setTimeout(() => document.getElementById("content").classList.remove("invalid"), 3000);
+                return;
+            }
+
+            const post = {
+                id: generatePostId(),
+                title,
+                author,
+                content,
+                timestamp: new Date().toISOString()
+            };
+
+            savePost(post);
+            document.getElementById("post-form").reset();
+            renderPosts("post-list");
+            showNotification("Post submitted successfully!", "success");
+        });
+
+        document.querySelectorAll("input, textarea").forEach(input => {
+            input.addEventListener("input", () => {
+                input.classList.remove("invalid");
+            });
+        });
+    </script>
+</body>
+</html>
